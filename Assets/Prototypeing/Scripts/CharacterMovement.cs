@@ -9,6 +9,7 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private Collider _colider;
     [SerializeField] private Transform _transform;
     [SerializeField] private float _speed;
+    [SerializeField] private float _rotationSpeed;
 
 
 
@@ -19,6 +20,7 @@ public class CharacterMovement : MonoBehaviour
     private bool _hasPlayerInput = false;
 
     private Vector3 Movement = new Vector3(0, 0, 0);
+    private Vector3 Rotation = new Vector3(0, 0, 0);
     
 
     private void OnEnable()
@@ -28,21 +30,13 @@ public class CharacterMovement : MonoBehaviour
         _hasTransform = _transform != null;
     }
 
-    private void OnDisable()
-    {
-
-    }
-
-    private void Awake()
-    {
-
-    }
-
     private void Update()
     {
         if (_hasTransform)
         {
-            _transform.position +=  Movement *(_speed* Time.deltaTime);
+            _transform.Translate(Movement * (_speed * Time.deltaTime));          
+
+            _transform.Rotate(Vector3.up * Rotation.y * (Time.deltaTime * _rotationSpeed));
         }
     }
 
@@ -67,6 +61,17 @@ public class CharacterMovement : MonoBehaviour
             Movement.z = direction.y;
 
         }   
+        
+    }
+
+    public void Rotate(InputAction.CallbackContext context)
+    {
+        if (context.performed || context.canceled)
+        {
+            Vector2 direction = context.ReadValue<Vector2>();
+
+            Rotation.y = direction.x;
+        }
         
     }
 
