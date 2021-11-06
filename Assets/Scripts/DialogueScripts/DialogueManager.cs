@@ -45,10 +45,10 @@ public class DialogueManager : MonoBehaviour
         }
 
         //Tempcode. Call Continue Story when submit Action is pressed
-        var keyboard = Keyboard.current;
-        if (keyboard == null)
+        var mouse = Mouse.current;
+        if (mouse == null)
             return;
-        if (keyboard.aKey.wasPressedThisFrame)
+        if (mouse.leftButton.wasReleasedThisFrame)
         {
             ContinueStory();
         }
