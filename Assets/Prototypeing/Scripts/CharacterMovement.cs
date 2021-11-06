@@ -11,13 +11,10 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private float _rotationSpeed;
 
-
-
-
     private bool _hasRgidbody = false;
     private bool _hasColider = false;
     private bool _hasTransform = false;
-    private bool _hasPlayerInput = false;
+    
 
     private Vector3 Movement = new Vector3(0, 0, 0);
     private Vector3 Rotation = new Vector3(0, 0, 0);
