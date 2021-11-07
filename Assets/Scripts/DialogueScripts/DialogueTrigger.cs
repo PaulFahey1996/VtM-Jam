@@ -24,7 +24,7 @@ public class DialogueTrigger : MonoBehaviour
 
     private void OnDisable()
     {
-        DialogueManager.GetInstance().UnSubscribeOnDialogueTriggered(StartDialogue);
+        DialogueManager.GetInstance().UnSubscribeOnDialogueTriggered(StartDialogue); 
     }
 
     private void Awake()
