@@ -67,7 +67,7 @@ public class DialogueTrigger : MonoBehaviour
         if (inkJSON != null)
         {
             Debug.Log("start ink");
-            //DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
+            DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
         }
 
     }
