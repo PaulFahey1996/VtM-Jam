@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8791052344230698993}
   m_Layer: 0
   m_Name: NPC
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 8791052344343312988}
   m_Layer: 0
   m_Name: Cue
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -123,7 +123,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8791052344343312986}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 8791052344642974286}
   m_Layer: 0
   m_Name: Trigger
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -187,6 +187,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visualCue: {fileID: 8791052344343312986}
   inkJSON: {fileID: 4900000, guid: 6cd10717bef6c63419877cdb7c3cc1e5, type: 3}
+  playerInRange: 1
+  _iD: 0
 --- !u!1 &8791052344973571939
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,7 +203,7 @@ GameObject:
   - component: {fileID: 8791052344973571941}
   m_Layer: 0
   m_Name: Visual
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

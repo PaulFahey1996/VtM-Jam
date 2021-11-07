@@ -10,6 +10,7 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private Transform _transform;
     [SerializeField] private float _speed;
     [SerializeField] private float _rotationSpeed;
+    [SerializeField] private GameObject _rayCaster;
 
     private bool _hasRgidbody = false;
     private bool _hasColider = false;
@@ -41,10 +42,18 @@ public class CharacterMovement : MonoBehaviour
 
     public void Interact(InputAction.CallbackContext context)
     {
-
         if (context.started)
         {
             Debug.Log("interact");
+
+            RaycastHit hit;
+            if (_rayCaster != null)
+            {
+                if (Physics.Raycast(_rayCaster.transform.position, _rayCaster.transform.TransformDirection(Vector3.forward),out hit, 10 ))
+                {
+                    DialogueManager.GetInstance().TriggerInteractionByTag(hit.collider.gameObject.tag);
+                }
+            }
         }
     }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,7 @@ public class DialogueManager : MonoBehaviour
 
     private static DialogueManager instance;
 
+
     private void Awake()
     {
         if(instance != null)
@@ -34,7 +36,10 @@ public class DialogueManager : MonoBehaviour
     private void Start()
     {
         dialoguePlaying = false;
-        dialoguePanel.SetActive(false);
+        if (dialoguePanel != null)
+        {
+            dialoguePanel.SetActive(false);
+        }
     }
 
     private void Update()
@@ -60,7 +65,10 @@ public class DialogueManager : MonoBehaviour
     {
         currentStory = new Story(inkJSON.text);
         dialoguePlaying = true;
-        dialoguePanel.SetActive(true);
+        if (dialoguePanel != null)
+        {
+            dialoguePanel.SetActive(true);
+        }
 
         ContinueStory();
     }
@@ -68,19 +76,61 @@ public class DialogueManager : MonoBehaviour
     private void ExitDialogueMode()
     {
         dialoguePlaying = false;
-        dialoguePanel.SetActive(false);
-        dialogueText.text = "";
+        if (dialoguePanel != null)
+        {
+            dialoguePanel.SetActive(false);
+        }
+
+        if (dialogueText != null)
+        {
+            dialogueText.text = "";
+        }
     }
 
     private void ContinueStory()
     {
         if (currentStory.canContinue)
         {
-            dialogueText.text = currentStory.Continue();
+            if (dialogueText != null)
+            {
+                dialogueText.text = currentStory.Continue();
+            }
         }
         else
         {
             ExitDialogueMode();
+        }
+    }
+
+
+    #region Events
+
+    private event Action<string> OnDialogueTriggerd;
+
+    public void SubscribeToOnDialogueTriggered(Action<string> startDialogue)
+    {
+        if (startDialogue != null)
+        {
+            OnDialogueTriggerd -= startDialogue;
+            OnDialogueTriggerd += startDialogue;
+        }
+    }
+
+    public void UnSubscribeOnDialogueTriggered(Action<string> startDialogue)
+    {
+        if (startDialogue != null)
+        {
+            OnDialogueTriggerd -= startDialogue;
+        }
+    }
+
+    #endregion
+
+    public void TriggerInteractionByTag(string gameObjectTag)
+    {
+        if (OnDialogueTriggerd != null)
+        {
+            OnDialogueTriggerd(gameObjectTag);
         }
     }
 }

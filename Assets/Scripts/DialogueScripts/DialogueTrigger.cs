@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
@@ -11,9 +12,20 @@ public class DialogueTrigger : MonoBehaviour
     [Header("INK JSON")]
     [SerializeField] private TextAsset inkJSON;
 
-    private bool playerInRange;
+    [SerializeField]private bool playerInRange;
+
+    [SerializeField] private long _iD;
 
 
+    private void OnEnable()
+    {
+        DialogueManager.GetInstance().SubscribeToOnDialogueTriggered(StartDialogue);
+    }
+
+    private void OnDisable()
+    {
+        DialogueManager.GetInstance().UnSubscribeOnDialogueTriggered(StartDialogue);
+    }
 
     private void Awake()
     {
@@ -25,19 +37,6 @@ public class DialogueTrigger : MonoBehaviour
         if (playerInRange)
         {
             visualCue.SetActive(true);
-
-            //Temp code. Call player Interaction script here
-            var keyboard = Keyboard.current; 
-            if (keyboard == null)
-                return;
-            if(keyboard.eKey.wasPressedThisFrame)
-            {
-                Debug.Log(inkJSON);
-                DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
-            }
-          
-            //Temp code. Call player Interaction script here
-
         }
         else
         {
@@ -61,5 +60,15 @@ public class DialogueTrigger : MonoBehaviour
             playerInRange = false;
             Debug.Log("Bye, Felicia.");
         }
+    }
+
+    private void StartDialogue(string tag)
+    {
+        if (inkJSON != null)
+        {
+            Debug.Log("start ink");
+            //DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
+        }
+
     }
 }
