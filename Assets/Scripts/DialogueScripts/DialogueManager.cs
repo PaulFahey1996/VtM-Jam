@@ -55,15 +55,7 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        //Tempcode. Call Continue Story when submit Action is pressed
-        var mouse = Mouse.current;
-        if (mouse == null)
-            return;
-        if (mouse.leftButton.wasReleasedThisFrame)
-        {
-            ContinueStory();
-        }
-        //Tempcode. Call Continue Story when submit Action is pressed
+        
 
     }
 
@@ -93,19 +85,22 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    private void ContinueStory()
+    public bool ContinueStory()
     {
-        if (currentStory.canContinue)
+        
+        
+        if (currentStory != null && currentStory.canContinue)
         {
             if (dialogueText != null)
             {
                 dialogueText.text = currentStory.Continue();
+                return true;
             }
         }
-        else
-        {
-            ExitDialogueMode();
-        }
+       
+        ExitDialogueMode();
+        return false;
+        
     }
 
 

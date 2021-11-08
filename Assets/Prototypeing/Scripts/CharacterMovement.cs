@@ -15,6 +15,7 @@ public class CharacterMovement : MonoBehaviour
     private bool _hasRgidbody = false;
     private bool _hasColider = false;
     private bool _hasTransform = false;
+    private bool _UiOpen = false;
     
 
     private Vector3 Movement = new Vector3(0, 0, 0);
@@ -30,7 +31,7 @@ public class CharacterMovement : MonoBehaviour
 
     private void Update()
     {
-        if (_hasTransform)
+        if (_hasTransform && !_UiOpen)
         {
             _transform.Translate(Movement * (_speed * Time.deltaTime));          
 
@@ -44,21 +45,33 @@ public class CharacterMovement : MonoBehaviour
     {
         if (context.started)
         {
-            Debug.Log("interact");
-
             RaycastHit hit;
-            if (_rayCaster != null)
+            if (_rayCaster != null && !_UiOpen)
             {
                 if (Physics.Raycast(_rayCaster.transform.position, _rayCaster.transform.TransformDirection(Vector3.forward),out hit, 10 ))
                 {
                     DialogueManager.GetInstance().TriggerInteractionByTag(hit.collider.gameObject.tag);
+                    _UiOpen = true;
                 }
+            }
+            else
+            {
+                _UiOpen = DialogueManager.GetInstance().ContinueStory();
             }
         }
     }
 
     public void Move(InputAction.CallbackContext context)
     {
+        if (_UiOpen)
+        {
+            Movement.x = 0;
+            Movement.z = 0;
+            return;
+        }
+        
+        
+        
         if (context.performed || context.canceled)
         {
             Vector2 direction = context.ReadValue<Vector2>();
@@ -72,6 +85,12 @@ public class CharacterMovement : MonoBehaviour
 
     public void Rotate(InputAction.CallbackContext context)
     {
+        if (_UiOpen)
+        {
+            Rotation.y = 0;
+            return;
+        }
+        
         if (context.performed || context.canceled)
         {
             Vector2 direction = context.ReadValue<Vector2>();
