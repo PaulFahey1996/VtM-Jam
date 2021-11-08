@@ -26,6 +26,12 @@ public class DialogueManager : MonoBehaviour
             Debug.LogWarning("Multiple Dialogue Managers detected.");
         }
         instance = this;
+        Debug.Log(instance);
+    }
+
+    private void OnDestroy()
+    {
+        instance = null;
     }
 
     public static DialogueManager GetInstance()

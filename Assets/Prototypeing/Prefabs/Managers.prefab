@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8027593817709442442}
-  - component: {fileID: 8027593817709442443}
   m_Layer: 0
   m_Name: DialogueManager
   m_TagString: Untagged
@@ -31,20 +30,6 @@ Transform:
   m_Father: {fileID: 8027593818997089737}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8027593817709442443
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8027593817709442485}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f46e15f744c4de2468c9d7a67660cf89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialoguePanel: {fileID: 0}
-  dialogueText: {fileID: 0}
 --- !u!1 &8027593818063288351
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,6 +120,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8027593818997089737}
+  - component: {fileID: 8180311660706532203}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -158,3 +144,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8180311660706532203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8027593818997089736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f46e15f744c4de2468c9d7a67660cf89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialoguePanel: {fileID: 0}
+  dialogueText: {fileID: 0}
